@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODE Huevos K - Mundial 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 700px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 20px; text-align: center; }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { font-size: 14px; opacity: 0.95; }
+        .content { padding: 30px; }
+        .form-section { margin-bottom: 25px; }
+        .form-section h2 { font-size: 16px; color: #667eea; margin-bottom: 15px; border-bottom: 2px solid #667eea; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; color: #333; font-size: 14px; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; }
+        input:focus, select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 5px rgba(102, 126, 234, 0.4); }
+        .prediccion-row { display: grid; grid-template-columns: 1fr 40px 1fr 40px; gap: 10px; align-items: end; }
+        .prediccion-row label { margin-bottom: 0; font-size: 13px; }
+        .prediccion-row input { padding: 8px; }
+        .vs { text-align: center; font-weight: bold; color: #667eea; font-size: 12px; }
+        .partido-label { font-size: 13px; color: #666; margin-bottom: 8px; display: block; }
+        .btn { width: 100%; padding: 12px; background: #667eea; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; margin-bottom: 15px; }
+        .btn:hover { background: #5568d3; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
+        .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+        .ranking { background: #f9f9f9; border: 2px solid #667eea; border-radius: 8px; padding: 20px; margin-top: 30px; }
+        .ranking h3 { color: #667eea; margin-bottom: 15px; text-align: center; font-size: 18px; }
+        .ranking-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; margin-bottom: 10px; border-radius: 6px; border-left: 4px solid #667eea; }
+        .rank-medal { font-size: 24px; margin-right: 12px; min-width: 30px; }
+        .rank-name { flex: 1; font-weight: 500; color: #333; }
+        .rank-score { font-weight: bold; color: #764ba2; min-width: 100px; text-align: right; }
+        .error { color: #d32f2f; font-size: 12px; margin-top: 3px; }
+        .success { background: #c8e6c9; color: #2e7d32; padding: 12px; border-radius: 6px; margin-bottom: 15px; text-align: center; display: none; }
+        .deadline { text-align: center; color: #999; font-size: 12px; margin-top: 12px; font-style: italic; }
+        .required { color: #d32f2f; }
+        .empty-ranking { text-align: center; color: #999; padding: 20px; }
+        .btn-secondary { background: #764ba2; }
+        .btn-secondary:hover { background: #6a3f99; }
+        @media (max-width: 600px) {
+            .content { padding: 20px; }
+            .header { padding: 20px 15px; }
+            .header h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ PRODE MUNDIAL 2026</h1>
+            <p>Huevos K - Predice resultados exactos y gana premios</p>
+        </div>
+
+        <div class="content">
+            <div id="successMsg" class="success">✅ ¡Predicciones guardadas! Revisa el ranking abajo.</div>
+
+            <form id="prodeForm">
+                <!-- DATOS PERSONALES -->
+                <div class="form-section">
+                    <h2>📋 Datos Personales</h2>
+                    <div class="form-group">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" name="email" required>
+                        <span class="error" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido <span class="required">*</span></label>
+                        <input type="text" name="apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre Completo <span class="required">*</span></label>
+                        <input type="text" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>DNI <span class="required">*</span></label>
+                        <input type="text" name="dni" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Nacimiento <span class="required">*</span></label>
+                        <input type="date" name="fechaNac" required>
+                    </div>
+                </div>
+
+                <!-- DATOS LABORALES -->
+                <div class="form-section">
+                    <h2>💼 Datos Laborales</h2>
+                    <div class="form-group">
+                        <label>Empresa/Establecimiento <span class="required">*</span></label>
+                        <input type="text" name="empresa" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cargo/Posición <span class="required">*</span></label>
+                        <input type="text" name="cargo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono <span class="required">*</span></label>
+                        <input type="tel" name="telefono" required>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍA -->
+                <div class="form-section">
+                    <h2>👤 ¿Quién eres?</h2>
+                    <div class="form-group">
+                        <select name="categoria" required>
+                            <option value="">-- Selecciona categoría --</option>
+                            <option value="Cliente">Soy cliente</option>
+                            <option value="Empleado">Trabajo en la empresa</option>
+                            <option value="Participante">Solo vine a participar</option>
+                        </select>
+                        <span class="error" id="categoriaError"></span>
+                    </div>
+                </div>
+
+                <!-- PREDICCIONES -->
+                <div class="form-section">
+                    <h2>🎯 Predicciones (Resultado Exacto)</h2>
+                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Escribe los goles que crees que harán Argentina y su rival</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <span class="partido-label">Partido 1: Argentina vs Marruecos</span>
+                        <span class="partido-label" style="font-size: 12px; color: #999;">16 de junio - Cierre: 21:00 hs</span>
+                        <div class="prediccion-row">
+                            <input type="number" name="pred1_arg" min="0" max="10" placeholder="Goles" required>
+                            <div class="vs">vs</div>
+                            <input type="number" name="pred1_rival" min="0" max="10" placeholder="Goles" required>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <span class="partido-label">Partido 2: Argentina vs [Próximo Rival]</span>
+                        <span class="partido-label" style="font-size: 12px; color: #999;">Fecha TBD - Cierre: 1 hora antes</span>
+                        <div class="prediccion-row">
+                            <input type="number" name="pred2_arg" min="0" max="10" placeholder="Goles" required>
+                            <div class="vs">vs</div>
+                            <input type="number" name="pred2_rival" min="0" max="10" placeholder="Goles" required>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <span class="partido-label">Partido 3: Argentina vs [Próximo Rival]</span>
+                        <span class="partido-label" style="font-size: 12px; color: #999;">Fecha TBD - Cierre: 1 hora antes</span>
+                        <div class="prediccion-row">
+                            <input type="number" name="pred3_arg" min="0" max="10" placeholder="Goles" required>
+                            <div class="vs">vs</div>
+                            <input type="number" name="pred3_rival" min="0" max="10" placeholder="Goles" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">📤 ENVIAR MIS PREDICCIONES</button>
+            </form>
+
+            <!-- RANKING PÚBLICO -->
+            <div class="ranking">
+                <h3>🏆 TOP 3 GANADORES</h3>
+                <div id="rankingList">
+                    <p class="empty-ranking">Cargando ranking...</p>
+                </div>
+                <button class="btn btn-secondary" onclick="reloadRanking()">🔄 Actualizar Ranking</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxa626ECA4xq_5SQ2yLk2_5mL9vhcgTuJ58fOwH6mah5EBs_v3B6WX_bU9VfZUxoIcSiQ/exec";
+
+        document.getElementById("prodeForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const emailInput = document.querySelector('input[name="email"]');
+            const email = emailInput.value;
+            document.getElementById("emailError").textContent = "";
+
+            const formData = new FormData(e.target);
+            const data = {
+                email: formData.get("email"),
+                apellido: formData.get("apellido"),
+                nombre: formData.get("nombre"),
+                dni: formData.get("dni"),
+                fechaNac: formData.get("fechaNac"),
+                empresa: formData.get("empresa"),
+                cargo: formData.get("cargo"),
+                telefono: formData.get("telefono"),
+                categoria: formData.get("categoria"),
+                pred1_arg: parseInt(formData.get("pred1_arg")),
+                pred1_rival: parseInt(formData.get("pred1_rival")),
+                pred2_arg: parseInt(formData.get("pred2_arg")),
+                pred2_rival: parseInt(formData.get("pred2_rival")),
+                pred3_arg: parseInt(formData.get("pred3_arg")),
+                pred3_rival: parseInt(formData.get("pred3_rival"))
+            };
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    body: JSON.stringify(data)
+                });
+
+                document.getElementById("prodeForm").reset();
+                document.getElementById("successMsg").style.display = "block";
+                window.scrollTo(0, 0);
+                
+                setTimeout(() => {
+                    document.getElementById("successMsg").style.display = "none";
+                }, 5000);
+                
+                setTimeout(() => {
+                    reloadRanking();
+                }, 1000);
+
+            } catch (err) {
+                console.error("Error:", err);
+                document.getElementById("emailError").textContent = "Error al guardar. Intenta nuevamente.";
+            }
+        });
+
+        function reloadRanking() {
+            const rankingList = document.getElementById("rankingList");
+            rankingList.innerHTML = "<p class='empty-ranking'>Cargando ranking...</p>";
+            
+            fetch(WEB_APP_URL + "?action=getLeaderboard", { mode: "no-cors" })
+                .then(r => {
+                    if (r.status === 0) return "[]";
+                    return r.text();
+                })
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text);
+                        if (!data || data.length === 0) {
+                            rankingList.innerHTML = "<p class='empty-ranking'>Aún no hay participantes. ¡Sé el primero!</p>";
+                        } else {
+                            const medals = ["🥇", "🥈", "🥉"];
+                            rankingList.innerHTML = data.map((item, idx) => `
+                                <div class="ranking-item">
+                                    <span class="rank-medal">${medals[idx]}</span>
+                                    <div class="rank-name">${escapeHtml(item.nombre)}</div>
+                                    <div class="rank-score">${item.aciertos || 0} pts</div>
+                                </div>
+                            `).join("");
+                        }
+                    } catch (e) {
+                        rankingList.innerHTML = "<p class='empty-ranking'>Error al cargar ranking. Intenta actualizar.</p>";
+                    }
+                })
+                .catch(err => {
+                    console.error("Fetch error:", err);
+                    rankingList.innerHTML = "<p class='empty-ranking'>Error de conexión. Recarga la página.</p>";
+                });
+        }
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // Cargar ranking al abrir
+        reloadRanking();
+    </script>
+</body>
+</html>
