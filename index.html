@@ -26,7 +26,7 @@
         .page-content { position:relative; z-index:1; }
 
         /* HEADER */
-        .header { background: linear-gradient(180deg,#000 0%,rgba(10,10,10,0.97) 100%); padding:14px 20px 10px; display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:3px solid var(--amarillo); position:relative; overflow:hidden; animation:fadeDown 0.6s ease both; }
+        .header { background: linear-gradient(180deg,#000 0%,rgba(10,10,10,0.97) 100%); padding:14px 20px 10px; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px; border-bottom:3px solid var(--amarillo); position:relative; overflow:hidden; animation:fadeDown 0.6s ease both; }
         .header::after { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg,transparent,rgba(245,196,0,0.08),transparent); animation:shimmer 4s ease-in-out infinite; }
         @keyframes shimmer { 0%,100%{left:-100%} 50%{left:150%} }
         .logo-wrap img { height:70px; width:auto; display:block; filter:drop-shadow(0 0 12px rgba(245,196,0,0.35)); transition:filter 0.3s; }
@@ -133,7 +133,6 @@
 
         /* COUNTDOWN */
         .countdown-wrap {
-            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -282,7 +281,7 @@
                         <div class="partido-card">
                             <div class="partido-num">Partido 1 · Grupo J</div>
                             <div class="partido-title">Argentina vs Argelia</div>
-                            <div class="partido-fecha">📅 Martes 16 de junio &nbsp;|&nbsp; ⏰ Cierre: 21:00 hs</div>
+                            <div class="partido-fecha">📅 Martes 16 de junio &nbsp;|&nbsp; ⏰ 22:00 hs</div>
                             <div class="score-row">
                                 <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred1_arg" min="0" max="10" placeholder="0"></div>
                                 <div class="vs-badge">VS</div>
@@ -293,7 +292,7 @@
                         <div class="partido-card">
                             <div class="partido-num">Partido 2 · Grupo J</div>
                             <div class="partido-title">Argentina vs Austria</div>
-                            <div class="partido-fecha">📅 Lunes 22 de junio &nbsp;|&nbsp; ⏰ Cierre: 13:00 hs</div>
+                            <div class="partido-fecha">📅 Lunes 22 de junio &nbsp;|&nbsp; ⏰ 14:00 hs</div>
                             <div class="score-row">
                                 <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred2_arg" min="0" max="10" placeholder="0"></div>
                                 <div class="vs-badge">VS</div>
@@ -304,7 +303,7 @@
                         <div class="partido-card">
                             <div class="partido-num">Partido 3 · Grupo J</div>
                             <div class="partido-title">Jordania vs Argentina</div>
-                            <div class="partido-fecha">📅 Sábado 27 de junio &nbsp;|&nbsp; ⏰ Cierre: 22:00 hs</div>
+                            <div class="partido-fecha">📅 Sábado 27 de junio &nbsp;|&nbsp; ⏰ 23:00 hs</div>
                             <div class="score-row">
                                 <div class="team-block"><span class="team-flag">🇯🇴</span><div class="team-name">Jordania</div><input type="number" name="pred3_arg" min="0" max="10" placeholder="0"></div>
                                 <div class="vs-badge">VS</div>
