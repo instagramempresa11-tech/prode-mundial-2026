@@ -408,6 +408,34 @@
             btn.disabled = false; btn.textContent = "📤 Enviar mis predicciones";
         }
     });
+
+    /* COUNTDOWN TIMER */
+    window.addEventListener('DOMContentLoaded', function() {
+        const CIERRE = new Date(2026, 5, 16, 21, 0, 0);
+        const wrap = document.getElementById('countdown');
+        if (!wrap) return;
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function tick() {
+            const diff = CIERRE - new Date();
+            if (diff <= 0) {
+                wrap.innerHTML = '<span class="cd-closed">INSCRIPCIONES CERRADAS</span>';
+                return;
+            }
+            const days = Math.floor(diff / 86400000);
+            const hrs  = Math.floor((diff % 86400000) / 3600000);
+            const min  = Math.floor((diff % 3600000)  / 60000);
+            const sec  = Math.floor((diff % 60000)    / 1000);
+            document.getElementById('cd-days').textContent = pad(days);
+            document.getElementById('cd-hrs').textContent  = pad(hrs);
+            document.getElementById('cd-min').textContent  = pad(min);
+            document.getElementById('cd-sec').textContent  = pad(sec);
+        }
+
+        tick();
+        setInterval(tick, 1000);
+    });
 </script>
 </body>
 </html>
