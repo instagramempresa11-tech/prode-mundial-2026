@@ -39,8 +39,8 @@
         @keyframes fadeUp   { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
         /* BANNER */
-        .banner-wrap { width:100%; max-height:260px; overflow:hidden; position:relative; animation:fadeIn 1s ease 0.2s both; }
-        .banner-wrap img { width:100%; height:260px; object-fit:cover; object-position:center 20%; display:block; }
+        .banner-wrap { width:100%; overflow:hidden; position:relative; animation:fadeIn 1s ease 0.2s both; }
+        .banner-wrap img { width:100%; height:auto; max-height:420px; object-fit:cover; object-position:center 30%; display:block; }
         .banner-overlay { position:absolute; bottom:0; left:0; right:0; height:100%; background:linear-gradient(transparent 30%,rgba(10,10,10,0.5) 70%,var(--negro) 100%); }
         .banner-line { position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--rojo),var(--amarillo),var(--rojo),transparent); animation:linePulse 2.5s ease-in-out infinite; }
         @keyframes linePulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
@@ -308,9 +308,9 @@
                             <div class="partido-title">Jordania vs Argentina</div>
                             <div class="partido-fecha">📅 Sábado 27 de junio &nbsp;|&nbsp; ⏰ 23:00 hs</div>
                             <div class="score-row">
-                                <div class="team-block"><span class="team-flag">🇯🇴</span><div class="team-name">Jordania</div><input type="number" name="pred3_arg" min="0" max="10" placeholder="0"></div>
+                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred3_arg" min="0" max="10" placeholder="0"></div>
                                 <div class="vs-badge">VS</div>
-                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred3_rival" min="0" max="10" placeholder="0"></div>
+                                <div class="team-block"><span class="team-flag">🇯🇴</span><div class="team-name">Jordania</div><input type="number" name="pred3_rival" min="0" max="10" placeholder="0"></div>
                             </div>
                         </div>
 
