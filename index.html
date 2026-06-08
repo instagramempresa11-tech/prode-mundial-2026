@@ -212,9 +212,9 @@
                             <div class="partido-title">Argentina vs Argelia</div>
                             <div class="partido-fecha">📅 Martes 16 de junio &nbsp;|&nbsp; ⏰ Cierre: 21:00 hs</div>
                             <div class="score-row">
-                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred1_arg" min="0" max="10" placeholder="0" required></div>
+                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred1_arg" min="0" max="10" placeholder="0"></div>
                                 <div class="vs-badge">VS</div>
-                                <div class="team-block"><span class="team-flag">🇩🇿</span><div class="team-name">Argelia</div><input type="number" name="pred1_rival" min="0" max="10" placeholder="0" required></div>
+                                <div class="team-block"><span class="team-flag">🇩🇿</span><div class="team-name">Argelia</div><input type="number" name="pred1_rival" min="0" max="10" placeholder="0"></div>
                             </div>
                         </div>
 
@@ -223,9 +223,9 @@
                             <div class="partido-title">Argentina vs Austria</div>
                             <div class="partido-fecha">📅 Lunes 22 de junio &nbsp;|&nbsp; ⏰ Cierre: 13:00 hs</div>
                             <div class="score-row">
-                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred2_arg" min="0" max="10" placeholder="0" required></div>
+                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred2_arg" min="0" max="10" placeholder="0"></div>
                                 <div class="vs-badge">VS</div>
-                                <div class="team-block"><span class="team-flag">🇦🇹</span><div class="team-name">Austria</div><input type="number" name="pred2_rival" min="0" max="10" placeholder="0" required></div>
+                                <div class="team-block"><span class="team-flag">🇦🇹</span><div class="team-name">Austria</div><input type="number" name="pred2_rival" min="0" max="10" placeholder="0"></div>
                             </div>
                         </div>
 
@@ -234,9 +234,9 @@
                             <div class="partido-title">Jordania vs Argentina</div>
                             <div class="partido-fecha">📅 Sábado 27 de junio &nbsp;|&nbsp; ⏰ Cierre: 22:00 hs</div>
                             <div class="score-row">
-                                <div class="team-block"><span class="team-flag">🇯🇴</span><div class="team-name">Jordania</div><input type="number" name="pred3_arg" min="0" max="10" placeholder="0" required></div>
+                                <div class="team-block"><span class="team-flag">🇯🇴</span><div class="team-name">Jordania</div><input type="number" name="pred3_arg" min="0" max="10" placeholder="0"></div>
                                 <div class="vs-badge">VS</div>
-                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred3_rival" min="0" max="10" placeholder="0" required></div>
+                                <div class="team-block"><span class="team-flag">🇦🇷</span><div class="team-name">Argentina</div><input type="number" name="pred3_rival" min="0" max="10" placeholder="0"></div>
                             </div>
                         </div>
 
@@ -317,9 +317,9 @@
             email:formData.get("email"), apellido:formData.get("apellido"), nombre:formData.get("nombre"),
             domicilio:formData.get("domicilio"), dni:formData.get("dni"), fechaNac:formData.get("fechaNac"), empresa:formData.get("empresa"),
             cargo:formData.get("cargo"), telefono:formData.get("telefono"), categoria:formData.get("categoria"),
-            pred1_arg:parseInt(formData.get("pred1_arg")), pred1_rival:parseInt(formData.get("pred1_rival")),
-            pred2_arg:parseInt(formData.get("pred2_arg")), pred2_rival:parseInt(formData.get("pred2_rival")),
-            pred3_arg:parseInt(formData.get("pred3_arg")), pred3_rival:parseInt(formData.get("pred3_rival"))
+            pred1_arg:parseInt(formData.get("pred1_arg")) || 0, pred1_rival:parseInt(formData.get("pred1_rival")) || 0,
+            pred2_arg:parseInt(formData.get("pred2_arg")) || 0, pred2_rival:parseInt(formData.get("pred2_rival")) || 0,
+            pred3_arg:parseInt(formData.get("pred3_arg")) || 0, pred3_rival:parseInt(formData.get("pred3_rival")) || 0
         };
         const btn = e.target.querySelector(".btn-submit");
         btn.disabled = true; btn.textContent = "Enviando...";
